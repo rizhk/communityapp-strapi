@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "actualities",
+  "info": {
+    "singularName": "actuality",
+    "pluralName": "actualities",
+    "displayName": "actuality"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "cover": {
+      "type": "media"
+    },
+    "startDate": {
+      "type": "datetime"
+    },
+    "endDate": {
+      "type": "datetime"
+    },
+    "document": {
+      "type": "media"
+    },
+    "type": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Strapi Debug",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "trace": true,
+      "runtimeArgs": [
+        "run",
+        "develop:debug"
+      ],
+      "console": "integratedTerminal",
+      "restart": true,
+      "internalConsoleOptions": "neverOpen",
+      "autoAttachChildProcesses": true
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Manual attach",
+      "processId": "${command:PickProcess}",
+      "restart": true,
+    }
+  ]
+}
