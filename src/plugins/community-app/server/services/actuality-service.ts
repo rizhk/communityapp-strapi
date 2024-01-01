@@ -7,10 +7,16 @@ export default ({ strapi }: { strapi: Strapi }) => ({
     sort,
     populate,
     ...rest
-  }: { fields ?: string[], filters ?: {}, sort ?: {}, populate ?: {}, [key: string]: any }) => {
+  }: {
+    fields?: string[];
+    filters?: {};
+    sort?: {};
+    populate?: [];
+    [key: string]: any;
+  }) => {
     const actualities = await strapi.entityService?.findMany(
       "plugin::community-app.actuality",
-      {}
+      { populate: populate }
     );
     console.log(actualities);
     return actualities;
@@ -20,7 +26,6 @@ export default ({ strapi }: { strapi: Strapi }) => ({
       "plugin::community-app.actuality",
       { data: data }
     );
-    console.log(actuality);
     return actuality;
   },
   update: async (id, data) => {
@@ -37,16 +42,15 @@ export default ({ strapi }: { strapi: Strapi }) => ({
       "plugin::community-app.actuality",
       id
     );
-    console.log(id);
+
     return actuality;
   },
-  findOne: async (id) => {
+  findOne: async ({ id, populate }) => {
     const actuality = await strapi.entityService?.findOne(
       "plugin::community-app.actuality",
       id,
-      {}
+      { populate: populate }
     );
-    console.log(actuality);
     return actuality;
   },
 });
