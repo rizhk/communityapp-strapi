@@ -44,17 +44,18 @@ export default ({ strapi }: { strapi: Strapi }) => ({
 
       // Process the files...
       for (const file in filesSent) {
-        const uploadedFile = await strapi.plugins.upload.services.upload.upload(
-          {
-            data: {},
-            files: filesSent[file],
-          }
-        );
-        // Now the file is uploaded and you have access to its info
-        const fileObject = Array.isArray(uploadedFile)
-          ? uploadedFile.pop()
-          : uploadedFile;
-        body[file] = fileObject.id;
+        if (filesSent[file].name !== "undefined") {
+          const uploadedFile =
+            await strapi.plugins.upload.services.upload.upload({
+              data: {},
+              files: filesSent[file],
+            });
+          // Now the file is uploaded and you have access to its info
+          const fileObject = Array.isArray(uploadedFile)
+            ? uploadedFile.pop()
+            : uploadedFile;
+          body[file] = fileObject.id;
+        }
       }
 
       for (const column of columns) {
@@ -70,9 +71,9 @@ export default ({ strapi }: { strapi: Strapi }) => ({
           title: bodyData.title,
           startDate: new Date(bodyData.startDate),
           endDate: new Date(bodyData.endDate),
-          type: bodyData.type,
-          cover: bodyData.cover,
-          document: bodyData.document,
+          type: bodyData?.type,
+          cover: bodyData?.cover,
+          document: bodyData?.document,
         });
 
       // Return the created entity
@@ -105,20 +106,20 @@ export default ({ strapi }: { strapi: Strapi }) => ({
           id: id, // replace with the ID of the entity you want to fetch
           populate: ["cover", "document"], // specify the relations you want to include
         });
-
       // Process the files...
       for (const file in filesSent) {
-        const uploadedFile = await strapi.plugins.upload.services.upload.upload(
-          {
-            data: {},
-            files: filesSent[file],
-          }
-        );
-        // Now the file is uploaded and you have access to its info
-        const fileObject = Array.isArray(uploadedFile)
-          ? uploadedFile.pop()
-          : uploadedFile;
-        body[file] = fileObject.id;
+        if (filesSent[file].name !== "undefined") {
+          const uploadedFile =
+            await strapi.plugins.upload.services.upload.upload({
+              data: {},
+              files: filesSent[file],
+            });
+          // Now the file is uploaded and you have access to its info
+          const fileObject = Array.isArray(uploadedFile)
+            ? uploadedFile.pop()
+            : uploadedFile;
+          body[file] = fileObject.id;
+        }
       }
 
       for (const column of columns) {
@@ -134,13 +135,13 @@ export default ({ strapi }: { strapi: Strapi }) => ({
           title: bodyData.title,
           startDate: new Date(bodyData.startDate),
           endDate: new Date(bodyData.endDate),
-          type: bodyData.type,
-          cover: bodyData.cover,
+          type: bodyData?.type,
+          cover: bodyData?.cover,
           document: bodyData.document,
         });
 
       if (
-        filesSent &&
+        bodyData["cover"] &&
         oldActuality &&
         oldActuality?.document &&
         oldActuality.document?.id
@@ -148,7 +149,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
         await sharedServices({ strapi }).deleteFile(oldActuality.document?.id);
       }
       if (
-        filesSent &&
+        bodyData["document"] &&
         oldActuality &&
         oldActuality?.cover &&
         oldActuality.cover?.id

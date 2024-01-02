@@ -2,27 +2,24 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Strapi Debug",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceFolder}",
+      "name": "Strapi: Node",
       "runtimeExecutable": "npm",
-      "trace": true,
       "runtimeArgs": [
         "run",
-        "develop:debug"
+        "develop"
       ],
-      "console": "integratedTerminal",
-      "restart": true,
-      "internalConsoleOptions": "neverOpen",
-      "autoAttachChildProcesses": true
-    },
+      "restart": false,
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
     {
-      "type": "node",
-      "request": "attach",
-      "name": "Manual attach",
-      "processId": "${command:PickProcess}",
-      "restart": true,
+      "name": "CommunityApp: Full",
+      "configurations": [
+        "Strapi: Node",
+      ]
     }
   ]
 }
