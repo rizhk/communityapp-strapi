@@ -8,7 +8,7 @@
     "name": "A Strapi developer"
   },
   "scripts": {
-    "build": "strapi build",
+    "build": "strapi build && npm --prefix ./src/plugins/community-app install && npm --prefix ./src/plugins/community-app run build",
     "develop": "strapi develop",
     "develop:debug": "NODE_OPTIONS='--inspect=0.0.0.0:9229' strapi develop",
     "start": "strapi start",
