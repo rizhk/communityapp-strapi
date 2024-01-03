@@ -80,7 +80,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
       return entity;
     } catch (error) {
       console.error(error);
-      ctx.throw(500, "An error occurred while processing your request.");
+      ctx.throw(500, error.message);
     }
   },
   async update(ctx) {
@@ -161,7 +161,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
       return entity;
     } catch (error) {
       console.error(error);
-      ctx.throw(500, "An error occurred while processing your request.");
+      ctx.throw(500, error.message);
     }
   },
   async delete(ctx) {
